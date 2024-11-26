@@ -1,0 +1,129 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Structure definitions
+typedef struct {
+    double capacity;
+    double currentWaterLevel;
+} Reservoir;
+
+typedef struct {
+    double diameter;
+    double length;
+    double flowRate;
+} Pipeline;
+
+typedef struct {
+    double capacity;
+    double flowRate;
+} Pump;
+
+// Global variables
+Reservoir reservoir;
+Pipeline *pipelines;
+Pump *pumps;
+int pipelineCount;
+int pumpCount;
+
+// Module 1: Reservoir Identification Module
+void reservoirIdentification() {
+    printf("Reservoir Identification Module\n");
+    reservoir.capacity = 10000; // Example capacity in liters
+    reservoir.currentWaterLevel = 8000; // Example initial water level in liters
+    printf("Reservoir capacity: %.2f liters, Current water level: %.2f liters\n", reservoir.capacity, reservoir.currentWaterLevel);
+}
+
+// Module 2: Starting Pipeline Identification Module
+void startingPipelineIdentification() {
+    printf("Starting Pipeline Identification Module\n");
+    pipelineCount = 1; // Starting with one pipeline
+    pipelines = (Pipeline*) malloc(pipelineCount * sizeof(Pipeline));
+    pipelines[0].diameter = 0.5; // Example diameter in meters
+    pipelines[0].length = 100; // Example length in meters
+    pipelines[0].flowRate = 10; // Example flow rate in liters per second
+    printf("Pipeline 1 -> Diameter: %.2f meters, Length: %.2f meters, Flow rate: %.2f liters/second\n", pipelines[0].diameter, pipelines[0].length, pipelines[0].flowRate);
+}
+
+// Module 3: Pipeline Community Module
+void pipelineCommunity() {
+    printf("Pipeline Community Module\n");
+    pipelineCount = 3; // Example with three pipelines
+    pipelines = (Pipeline*) realloc(pipelines, pipelineCount * sizeof(Pipeline));
+    // Initialize remaining pipelines
+    pipelines[1].diameter = 0.4;
+    pipelines[1].length = 150;
+    pipelines[1].flowRate = 8;
+
+    pipelines[2].diameter = 0.6;
+    pipelines[2].length = 200;
+    pipelines[2].flowRate = 12;
+
+    for (int i = 0; i < pipelineCount; i++) {
+        printf("Pipeline %d -> Diameter: %.2f meters, Length: %.2f meters, Flow rate: %.2f liters/second\n", i+1, pipelines[i].diameter, pipelines[i].length, pipelines[i].flowRate);
+    }
+}
+
+// Module 4: Pumps Incorporation Module
+void pumpsIncorporation() {
+    printf("Pumps Incorporation Module\n");
+    pumpCount = 2; // Example with two pumps
+    pumps = (Pump*) malloc(pumpCount * sizeof(Pump));
+    pumps[0].capacity = 5000; // Example capacity in liters
+    pumps[0].flowRate = 20; // Example flow rate in liters per second
+
+    pumps[1].capacity = 3000;
+    pumps[1].flowRate = 15;
+
+    for (int i = 0; i < pumpCount; i++) {
+        printf("Pump %d -> Capacity: %.2f liters, Flow rate: %.2f liters/second\n", i+1, pumps[i].capacity, pumps[i].flowRate);
+    }
+}
+
+// Module 5: Pipeline Data Management Module
+void pipelineDataManagement() {
+    printf("Pipeline Data Management Module\n");
+    // Example of updating flow rate for each pipeline based on some conditions
+    for (int i = 0; i < pipelineCount; i++) {
+        pipelines[i].flowRate *= 1.1; // Increase flow rate by 10% as an example
+        printf("Updated Pipeline %d -> Flow rate: %.2f liters/second\n", i+1, pipelines[i].flowRate);
+    }
+}
+
+// Module 6: Pipeline Relationship Identification Module
+void pipelineRelationshipIdentification() {
+    printf("Pipeline Relationship Identification Module\n");
+    // Example logic to identify relationships between pipelines
+    for (int i = 0; i < pipelineCount - 1; i++) {
+        printf("Pipeline %d is connected to Pipeline %d\n", i+1, i+2);
+    }
+}
+
+// Module 7: Conclusion Module
+void conclusion() {
+    printf("Conclusion Module\n");
+    double totalFlowRate = 0;
+    for (int i = 0; i < pipelineCount; i++) {
+        totalFlowRate += pipelines[i].flowRate;
+    }
+    printf("Total flow rate through all pipelines: %.2f liters/second\n", totalFlowRate);
+    printf("Simulation completed.\n");
+
+    // Free allocated memory
+    free(pipelines);
+    free(pumps);
+}
+
+int main() {
+    printf("Water Flow Simulation in Pipes\n");
+    
+    // Call each module in the specified order
+    reservoirIdentification();
+    startingPipelineIdentification();
+    pipelineCommunity();
+    pumpsIncorporation();
+    pipelineDataManagement();
+    pipelineRelationshipIdentification();
+    conclusion();
+    
+    return 0;
+}
